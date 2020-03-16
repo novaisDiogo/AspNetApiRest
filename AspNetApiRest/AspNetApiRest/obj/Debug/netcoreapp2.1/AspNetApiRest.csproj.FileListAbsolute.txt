@@ -1,0 +1,16 @@
+C:\ProjetoAPI\AspNetApiRest\AspNetApiRest\AspNetApiRest\bin\Debug\netcoreapp2.1\appsettings.Development.json
+C:\ProjetoAPI\AspNetApiRest\AspNetApiRest\AspNetApiRest\bin\Debug\netcoreapp2.1\appsettings.json
+C:\ProjetoAPI\AspNetApiRest\AspNetApiRest\AspNetApiRest\bin\Debug\netcoreapp2.1\Properties\launchSettings.json
+C:\ProjetoAPI\AspNetApiRest\AspNetApiRest\AspNetApiRest\bin\Debug\netcoreapp2.1\AspNetApiRest.deps.json
+C:\ProjetoAPI\AspNetApiRest\AspNetApiRest\AspNetApiRest\bin\Debug\netcoreapp2.1\AspNetApiRest.runtimeconfig.json
+C:\ProjetoAPI\AspNetApiRest\AspNetApiRest\AspNetApiRest\bin\Debug\netcoreapp2.1\AspNetApiRest.runtimeconfig.dev.json
+C:\ProjetoAPI\AspNetApiRest\AspNetApiRest\AspNetApiRest\bin\Debug\netcoreapp2.1\AspNetApiRest.dll
+C:\ProjetoAPI\AspNetApiRest\AspNetApiRest\AspNetApiRest\bin\Debug\netcoreapp2.1\AspNetApiRest.pdb
+C:\ProjetoAPI\AspNetApiRest\AspNetApiRest\AspNetApiRest\obj\Debug\netcoreapp2.1\AspNetApiRest.csprojAssemblyReference.cache
+C:\ProjetoAPI\AspNetApiRest\AspNetApiRest\AspNetApiRest\obj\Debug\netcoreapp2.1\AspNetApiRest.RazorAssemblyInfo.cache
+C:\ProjetoAPI\AspNetApiRest\AspNetApiRest\AspNetApiRest\obj\Debug\netcoreapp2.1\AspNetApiRest.RazorAssemblyInfo.cs
+C:\ProjetoAPI\AspNetApiRest\AspNetApiRest\AspNetApiRest\obj\Debug\netcoreapp2.1\AspNetApiRest.AssemblyInfoInputs.cache
+C:\ProjetoAPI\AspNetApiRest\AspNetApiRest\AspNetApiRest\obj\Debug\netcoreapp2.1\AspNetApiRest.AssemblyInfo.cs
+C:\ProjetoAPI\AspNetApiRest\AspNetApiRest\AspNetApiRest\obj\Debug\netcoreapp2.1\AspNetApiRest.RazorTargetAssemblyInfo.cache
+C:\ProjetoAPI\AspNetApiRest\AspNetApiRest\AspNetApiRest\obj\Debug\netcoreapp2.1\AspNetApiRest.dll
+C:\ProjetoAPI\AspNetApiRest\AspNetApiRest\AspNetApiRest\obj\Debug\netcoreapp2.1\AspNetApiRest.pdb
