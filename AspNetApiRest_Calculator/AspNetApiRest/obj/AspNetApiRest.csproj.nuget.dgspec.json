@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\ProjetoAPI\\AspNetApiRest_Calculator\\AspNetApiRest\\AspNetApiRest\\AspNetApiRest.csproj": {}
+    "C:\\ProjetoAPI\\AspNetApiRest\\AspNetApiRest_Calculator\\AspNetApiRest\\AspNetApiRest.csproj": {}
   },
   "projects": {
-    "C:\\ProjetoAPI\\AspNetApiRest_Calculator\\AspNetApiRest\\AspNetApiRest\\AspNetApiRest.csproj": {
+    "C:\\ProjetoAPI\\AspNetApiRest\\AspNetApiRest_Calculator\\AspNetApiRest\\AspNetApiRest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\ProjetoAPI\\AspNetApiRest_Calculator\\AspNetApiRest\\AspNetApiRest\\AspNetApiRest.csproj",
+        "projectUniqueName": "C:\\ProjetoAPI\\AspNetApiRest\\AspNetApiRest_Calculator\\AspNetApiRest\\AspNetApiRest.csproj",
         "projectName": "AspNetApiRest",
-        "projectPath": "C:\\ProjetoAPI\\AspNetApiRest_Calculator\\AspNetApiRest\\AspNetApiRest\\AspNetApiRest.csproj",
+        "projectPath": "C:\\ProjetoAPI\\AspNetApiRest\\AspNetApiRest_Calculator\\AspNetApiRest\\AspNetApiRest.csproj",
         "packagesPath": "C:\\Users\\Diogo\\.nuget\\packages\\",
-        "outputPath": "C:\\ProjetoAPI\\AspNetApiRest_Calculator\\AspNetApiRest\\AspNetApiRest\\obj\\",
+        "outputPath": "C:\\ProjetoAPI\\AspNetApiRest\\AspNetApiRest_Calculator\\AspNetApiRest\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
