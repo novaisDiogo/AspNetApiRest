@@ -35,6 +35,8 @@ namespace UsingDiferentVerbs
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            services.AddApiVersioning();
+
             //Dependency Injection
             services.AddScoped<IPersonService, PersonServiceImpl>();
         }
