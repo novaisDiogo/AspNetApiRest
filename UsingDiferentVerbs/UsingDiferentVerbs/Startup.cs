@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -12,48 +11,69 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using UsingDiferentVerbs.Model.Context;
-using UsingDiferentVerbs.Services;
-using UsingDiferentVerbs.Services.Implementattions;
+using UsingDiferentVerbs.Business;
+using UsingDiferentVerbs.Business.Implementattions;
+using UsingDiferentVerbs.Repository;
+using UsingDiferentVerbs.Repository.Implementattions;
 
 namespace UsingDiferentVerbs
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        private readonly ILogger _logger;
+        public IConfiguration _configuration { get; }
+        public IHostingEnvironment _environment { get; }
 
-        public IConfiguration Configuration { get; }
+        public Startup(IConfiguration configuration, IHostingEnvironment environment, ILogger<Startup> logger)
+        {
+            _configuration = configuration;
+            _environment = environment;
+            _logger = logger;
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connection = Configuration["MySqlConnection:MySqlConnectionString"];
+            var connectionString = _configuration["MySqlConnection:MySqlConnectionString"];
 
-            services.AddDbContext<MySQLContext>(options => options.UseMySql(connection));
+            services.AddDbContext<MySQLContext>(options => options.UseMySql(connectionString));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            if (_environment.IsDevelopment())
+            {
+                try
+                {   
+                    var envolveConnection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
 
-            services.AddApiVersioning();
+                    var evolve = new Evolve.Evolve("evolve.json", envolveConnection, msg => _logger.LogInformation(msg))
+                    {
+                        Locations = new List<string> { "db/migrations" },
+                        IsEraseDisabled = true,
+                    };
+
+                    evolve.Migrate();
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogCritical("Database migration failed.", ex);
+                    throw;
+                }
+            }
+
+            services.AddMvc();
+
+            services.AddApiVersioning(option => option.ReportApiVersions = true);
 
             //Dependency Injection
-            services.AddScoped<IPersonService, PersonServiceImpl>();
+            services.AddScoped<IPersonBusiness, PersonBusinessImpl>();
+            services.AddScoped<IPersonRepository, PersonRepositoryImpl>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseHsts();
-            }
+            loggerFactory.AddConsole(_configuration.GetSection("Logging"));
+            loggerFactory.AddDebug();
 
-            app.UseHttpsRedirection();
             app.UseMvc();
         }
     }

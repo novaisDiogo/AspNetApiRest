@@ -5,14 +5,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using UsingDiferentVerbs.Model;
 using UsingDiferentVerbs.Model.Context;
+using UsingDiferentVerbs.Repository;
 
-namespace UsingDiferentVerbs.Services.Implementattions
+namespace UsingDiferentVerbs.Repository.Implementattions
 {
-    public class PersonServiceImpl : IPersonService
+    public class PersonRepositoryImpl : IPersonRepository
     {
         private MySQLContext _context;
 
-        public PersonServiceImpl(MySQLContext context)
+        public PersonRepositoryImpl(MySQLContext context)
         {
             _context = context;
         }
@@ -58,7 +59,9 @@ namespace UsingDiferentVerbs.Services.Implementattions
 
         public Person Update(Person person)
         {
-            if (!Exist(person.Id)) return new Person();
+            // Verificamos se a pessoa existe na base
+            // Se não existir retornamos uma instancia vazia de pessoa
+            if (!Exist(person.Id)) return null;
 
             var result = _context.Persons.SingleOrDefault(p => p.Id.Equals(person.Id));
 
@@ -74,7 +77,7 @@ namespace UsingDiferentVerbs.Services.Implementattions
             return person;
         }
 
-        private bool Exist(long? id)
+        public bool Exist(long? id)
         {
             return _context.Persons.Any(p => p.Id.Equals(id));
         }

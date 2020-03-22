@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using UsingDiferentVerbs.Model;
 
-namespace UsingDiferentVerbs.Services
+namespace UsingDiferentVerbs.Business
 {
-    public interface IPersonService
+    public interface IPersonBusiness
     {
         Person Create(Person person);
         Person FindById(long id);
