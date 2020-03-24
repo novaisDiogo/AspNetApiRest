@@ -15,6 +15,7 @@ using UsingDiferentVerbs.Business;
 using UsingDiferentVerbs.Business.Implementattions;
 using UsingDiferentVerbs.Repository;
 using UsingDiferentVerbs.Repository.Implementattions;
+using UsingDiferentVerbs.Repository.Generic;
 
 namespace UsingDiferentVerbs
 {
@@ -65,7 +66,9 @@ namespace UsingDiferentVerbs
 
             //Dependency Injection
             services.AddScoped<IPersonBusiness, PersonBusinessImpl>();
-            services.AddScoped<IPersonRepository, PersonRepositoryImpl>();
+            services.AddScoped<IBookBusiness, BookBusinessImpl>();
+
+            services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
