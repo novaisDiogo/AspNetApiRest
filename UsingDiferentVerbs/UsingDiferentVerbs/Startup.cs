@@ -17,6 +17,8 @@ using UsingDiferentVerbs.Repository;
 using UsingDiferentVerbs.Repository.Implementattions;
 using UsingDiferentVerbs.Repository.Generic;
 using Microsoft.Net.Http.Headers;
+using Tapioca.HATEOAS;
+using UsingDiferentVerbs.HyperMedia;
 
 namespace UsingDiferentVerbs
 {
@@ -71,6 +73,12 @@ namespace UsingDiferentVerbs
             })
                 .AddXmlSerializerFormatters();
 
+            var filterOptions = new HyperMediaFilterOptions();
+            filterOptions.ObjectContentResponseEnricherList.Add(new PersonEnricher());
+            filterOptions.ObjectContentResponseEnricherList.Add(new BookEnricher());
+
+            services.AddSingleton(filterOptions);
+
             services.AddApiVersioning(option => option.ReportApiVersions = true);
 
             //Dependency Injection
@@ -86,7 +94,12 @@ namespace UsingDiferentVerbs
             loggerFactory.AddConsole(_configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseMvc();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "DefaultApi",
+                    template: "{controller=Values}/{id?}");
+            });
         }
     }
 }

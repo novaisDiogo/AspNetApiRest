@@ -6,14 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using UsingDiferentVerbs.Model;
 using UsingDiferentVerbs.Business;
 using UsingDiferentVerbs.Data.VO;
+using Tapioca.HATEOAS;
 
 namespace UsingDiferentVerbs.Controllers
 {
-    /* Mapeia as requisições de http://localhost:{porta}/api/person/
-    Por padrão o ASP.NET Core mapeia todas as classes que extendem Controller
-    pegando a primeira parte do nome da classe em lower case [Person]Controller
-    e expõe como endpoint REST
-    */
     [ApiVersion("1")]
     [Route("api/[controller]/v{version:apiVersion}")]
     public class PersonsController : Controller
@@ -27,12 +23,14 @@ namespace UsingDiferentVerbs.Controllers
         }
 
         [HttpGet]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get()
         {
             return Ok(_personBusiness.FindAll());
         }
 
         [HttpGet("{id}")]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get(long id)
         {
             var person = _personBusiness.FindById(id);
@@ -41,6 +39,7 @@ namespace UsingDiferentVerbs.Controllers
         }
 
         [HttpPost]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Post([FromBody]PersonVO person)
         {
             if (person == null) return BadRequest();
@@ -48,6 +47,7 @@ namespace UsingDiferentVerbs.Controllers
         }
 
         [HttpPut]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put([FromBody]PersonVO person)
         {
             if (person == null) return BadRequest();
@@ -57,6 +57,7 @@ namespace UsingDiferentVerbs.Controllers
         }
 
         [HttpDelete("{id}")]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Delete(int id)
         {
             _personBusiness.Delete(id);
