@@ -19,6 +19,8 @@ using UsingDiferentVerbs.Repository.Generic;
 using Microsoft.Net.Http.Headers;
 using Tapioca.HATEOAS;
 using UsingDiferentVerbs.HyperMedia;
+using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.AspNetCore.Rewrite;
 
 namespace UsingDiferentVerbs
 {
@@ -81,6 +83,14 @@ namespace UsingDiferentVerbs
 
             services.AddApiVersioning(option => option.ReportApiVersions = true);
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info 
+                { 
+                    Title = "RESTful API With ASP.NET Core 2.0", Version = "v1"
+                });
+            });
+
             //Dependency Injection
             services.AddScoped<IPersonBusiness, PersonBusinessImpl>();
             services.AddScoped<IBookBusiness, BookBusinessImpl>();
@@ -94,6 +104,18 @@ namespace UsingDiferentVerbs
             loggerFactory.AddConsole(_configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            //Swagger
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
+
+            var option = new RewriteOptions();
+            option.AddRedirect("^$", "swagger");
+            app.UseRewriter(option);
+            //
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

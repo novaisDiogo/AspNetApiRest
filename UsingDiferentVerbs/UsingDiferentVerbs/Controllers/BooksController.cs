@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,10 @@ namespace UsingDiferentVerbs.Controllers
         //Mapeia as requisições GET para http://localhost:{porta}/api/books/v1/
         //Get sem parâmetros para o FindAll --> Busca Todos
         [HttpGet]
+        [SwaggerResponse((200), Type = typeof(List<BookVO>))]
+        [SwaggerResponse(204)]
+        [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get()
         {
@@ -37,6 +42,10 @@ namespace UsingDiferentVerbs.Controllers
         //recebendo um ID como no Path da requisição
         //Get com parâmetros para o FindById --> Busca Por ID
         [HttpGet("{id}")]
+        [SwaggerResponse((200), Type = typeof(BookVO))]
+        [SwaggerResponse(204)]
+        [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get(long id)
         {
@@ -48,6 +57,9 @@ namespace UsingDiferentVerbs.Controllers
         //Mapeia as requisições POST para http://localhost:{porta}/api/books/v1/
         //O [FromBody] consome o Objeto JSON enviado no corpo da requisição
         [HttpPost]
+        [SwaggerResponse((201), Type = typeof(BookVO))]
+        [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Post([FromBody]BookVO book)
         {
@@ -58,6 +70,9 @@ namespace UsingDiferentVerbs.Controllers
         //Mapeia as requisições PUT para http://localhost:{porta}/api/books/v1/
         //O [FromBody] consome o Objeto JSON enviado no corpo da requisição
         [HttpPut]
+        [SwaggerResponse((202), Type = typeof(BookVO))]
+        [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put([FromBody]BookVO book)
         {
@@ -71,6 +86,9 @@ namespace UsingDiferentVerbs.Controllers
         //Mapeia as requisições DELETE para http://localhost:{porta}/api/books/v1/{id}
         //recebendo um ID como no Path da requisição
         [HttpDelete("{id}")]
+        [SwaggerResponse(204)]
+        [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Delete(int id)
         {

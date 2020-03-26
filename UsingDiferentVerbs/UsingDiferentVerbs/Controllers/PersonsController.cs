@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using UsingDiferentVerbs.Model;
 using UsingDiferentVerbs.Business;
 using UsingDiferentVerbs.Data.VO;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using Tapioca.HATEOAS;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace UsingDiferentVerbs.Controllers
 {
@@ -23,6 +25,10 @@ namespace UsingDiferentVerbs.Controllers
         }
 
         [HttpGet]
+        [SwaggerResponse((200), Type = typeof(List<PersonVO>))]
+        [SwaggerResponse(204)]
+        [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get()
         {
@@ -30,6 +36,10 @@ namespace UsingDiferentVerbs.Controllers
         }
 
         [HttpGet("{id}")]
+        [SwaggerResponse((200), Type = typeof(PersonVO))]
+        [SwaggerResponse(204)]
+        [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get(long id)
         {
@@ -39,6 +49,9 @@ namespace UsingDiferentVerbs.Controllers
         }
 
         [HttpPost]
+        [SwaggerResponse((201), Type = typeof(PersonVO))]
+        [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Post([FromBody]PersonVO person)
         {
@@ -47,6 +60,9 @@ namespace UsingDiferentVerbs.Controllers
         }
 
         [HttpPut]
+        [SwaggerResponse((202), Type = typeof(PersonVO))]
+        [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put([FromBody]PersonVO person)
         {
@@ -57,6 +73,9 @@ namespace UsingDiferentVerbs.Controllers
         }
 
         [HttpDelete("{id}")]
+        [SwaggerResponse(204)]
+        [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Delete(int id)
         {
